@@ -15,8 +15,6 @@ class Captcha
     public function __construct()
     {
         $this->code = rand(10000, 99999);
-//        parent::setSession('code', $this->code);
-//        $this->CreateImage();
     }
 
     public function CreateImage()

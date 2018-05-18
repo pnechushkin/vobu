@@ -11,7 +11,7 @@ class UserInform
     protected $ip_user;
     protected $user_agent;
     protected $HTTP_USER_AGENT;
-    protected $browser = 'indefined';
+    protected $browser;
 
     public function __construct()
     {
@@ -32,7 +32,10 @@ class UserInform
             $this->browser = "Internet Explorer";
         } elseif (strpos($this->HTTP_USER_AGENT, "Safari") !== false) {
             $this->browser = "Safari";
+        } else {
+            $this->browser = 'indefined';
         }
+        return $this->browser;
     }
 
     public function getIpUser()

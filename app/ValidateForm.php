@@ -58,7 +58,7 @@ class ValidateForm extends Sessions
             $this->rezalt = false;
             $this->message = 'Не указан email';
             return;
-        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $this->rezalt = false;
             $this->message = 'Email указан не корректно';
             return;
@@ -76,7 +76,7 @@ class ValidateForm extends Sessions
             $this->rezalt = false;
             $this->message = 'Введите сообщение';
             return;
-        } elseif ((preg_match("/[<\/][a-zA-Z]{1,7}[>]+/", $this->text))){
+        } elseif (strip_tags($this->text) != $this->text) {
             $this->rezalt = false;
             $this->message = 'В тексте присутсвуют HTML теги ';
             return;
@@ -85,7 +85,7 @@ class ValidateForm extends Sessions
             $this->rezalt = false;
             $this->message = 'Введите цифры';
             return;
-        } elseif ($this->captcha != $this->code){
+        } elseif ($this->captcha != $this->code) {
             $this->rezalt = false;
             $this->message = 'Капча введена не верно';
             return;
