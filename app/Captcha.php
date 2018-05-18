@@ -1,6 +1,6 @@
 <?php
 
-class captcha extends sessions
+class Captcha
 {
     private $height = 20;
     private $width = 100;
@@ -15,8 +15,8 @@ class captcha extends sessions
     public function __construct()
     {
         $this->code = rand(10000, 99999);
-        parent::setSession('code', $this->code);
-        $this->CreateImage();
+//        parent::setSession('code', $this->code);
+//        $this->CreateImage();
     }
 
     public function CreateImage()
@@ -37,7 +37,10 @@ class captcha extends sessions
 
             imagestring($this->image, 3, $this->y += 15, 3, $this->code[$i], $this->color);
         }
-//        header('Content-Type: image/jpeg');
-        $this->imagejpeg = imagejpeg($this->image, 'img/' . $this->code . '.jpg');
+        header('Content-Type: image/jpeg');
+        $this->imagejpeg = imagejpeg($this->image);
+    }
+    function getKeycaptcha(){
+        return $this->code;
     }
 }

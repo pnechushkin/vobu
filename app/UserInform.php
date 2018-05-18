@@ -6,7 +6,7 @@
  * Date: 17.05.2018
  * Time: 11:56
  */
-class user_inform
+class UserInform
 {
     protected $ip_user;
     protected $user_agent;

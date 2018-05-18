@@ -1,5 +1,5 @@
 <?php
-class sessions {
+class Sessions {
     public function getSession($key){
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
