@@ -9,7 +9,7 @@
 class MessagesNeeded extends Request
 {
     protected $limit = 1;
-    protected $direction_sorting = 'ASC'; //DESC
+    protected $direction_sorting = 'DESC'; //DESC
     protected $value_sorting = 'added';
     protected $select_sorting = array(
         'username' => '',
