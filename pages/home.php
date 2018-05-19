@@ -7,25 +7,28 @@ if (!empty($_POST)) {
         $BD = new BD();
         $UserInform = new UserInform;
         $data = array(
-            'username' => $_POST['username'],
-            'category' => $_POST['category'],
-            'email' => $_POST['email'],
-            'homepage' => $_POST['homepage'],
-            'message' => $_POST['text'],
+            'username' => cleen_val($_POST['username']),
+            'category' => cleen_val($_POST['category']),
+            'email' => cleen_val($_POST['email']),
+            'homepage' => cleen_val($_POST['homepage']),
+            'message' => cleen_val($_POST['text']),
             'ip_user' => $UserInform->getIpUser(),
             'user_agent' => $UserInform->getUserAgent(),
         );
         $sql = "INSERT INTO messages SET ?u";
-        $BD->query($sql,  $data);
-        var_dump($BD->lastQuery());
-        unset($_POST);
+        $BD->query($sql, $data);
+        if (!empty($BD->lastQuery())) {
+            $styleMes = 'alert alert-success';
+            $message = 'Спасибо за сообщение!';
+            unset($_POST);
+        }
     } else {
         $styleMes = 'alert alert-danger';
         $message = $form->getMessage();
     }
 }
 ?>
-<h1>Оставить комментарий!</h1>
+<h1 class="col-sm-offset-3 col-xs-offset-3 col-md-offset-3 col-lg-offset-3">Оставить комментарий!</h1>
 <form class="form-horizontal" method="post">
     <div class="form-group">
         <label for="username" class="col-sm-3 col-xs-3 col-md-3 col-lg-3 control-label">User Name</label>
@@ -39,9 +42,9 @@ if (!empty($_POST)) {
         <label for="category" class="col-sm-3 col-xs-3 col-md-3 col-lg-3 control-label">Category</label>
         <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
             <select name="category" id="category" size="3" class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
-                <option value="test">test</option>
-                <option value="test">test</option>
-                <option value="test">test</option>
+                <option value="question">Вопрос</option>
+                <option value="sentence">Предложение</option>
+                <option value="appeal">Жалоба</option>
             </select>
         </div>
     </div>
@@ -78,11 +81,11 @@ if (!empty($_POST)) {
 
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-4 col-xs-4 col-md-4 col-lg-4 col-xs-offset-4 col-md-offset-4 col-lg-offset-4">
-            <button type="submit" class="btn btn-default">Send</button>
+            <button type="submit" class="btn btn-default">Отправить</button>
         </div>
     </div>
 </form>
-<div class="<?php echo $styleMes; ?> col-sm-offset-3 col-sm-5 col-xs-5 col-md-5 col-lg-5 col-xs-offset-3 col-md-offset-3 col-lg-offset-3">
+<div class="<?php echo $styleMes; ?> col-sm-5 col-xs-5 col-md-5 col-lg-5 col-sm-offset-3 col-xs-offset-3 col-md-offset-3 col-lg-offset-3">
     <strong><?php echo $message; ?></strong>
 </div>
 

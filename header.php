@@ -1,8 +1,5 @@
 <?php
-spl_autoload_register(function ($class_name) {
-    include 'app/' . $class_name . '.php';
-});
-
+include 'functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,7 +11,7 @@ spl_autoload_register(function ($class_name) {
     <title>Гостевая книга</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,4 +21,8 @@ spl_autoload_register(function ($class_name) {
     <![endif]-->
 </head>
 <body>
+<ul class="nav nav-tabs">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/messages/">Сообщения</a></li>
+</ul>
 <div class="container-fluid">
