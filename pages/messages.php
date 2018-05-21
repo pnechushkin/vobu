@@ -49,12 +49,12 @@ if ($all_mes_q < (($p + 1) * 25)) {
 <div class="row">
     <table class="table">
         <tr>
-            <td>username</td>
-            <td>category</td>
+            <td>Логин</td>
+            <td>Категория</td>
             <td>email</td>
-            <td>homepage</td>
-            <td>message</td>
-            <td>added</td>
+            <td>URL</td>
+            <td>Сообщение</td>
+            <td>Дата</td>
         </tr>
         <?php
         for ($i = 0; $i < count($messages_arr); $i++) {
@@ -66,7 +66,7 @@ if ($all_mes_q < (($p + 1) * 25)) {
                 <td><?php echo $email ?></td>
                 <td><?php echo $homepage ?></td>
                 <td><?php echo $message ?></td>
-                <td><?php echo $added ?></td>
+                <td><?php echo date('d.m.Y', strtotime($added))  ?></td>
             </tr>
             <?php
         }
