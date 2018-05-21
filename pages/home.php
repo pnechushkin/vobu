@@ -42,9 +42,9 @@ if (!empty($_POST)) {
         <label for="category" class="col-sm-3 col-xs-3 col-md-3 col-lg-3 control-label">Category</label>
         <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5">
             <select name="category" id="category" size="3" class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
-                <option value="question">Вопрос</option>
-                <option value="sentence">Предложение</option>
-                <option value="appeal">Жалоба</option>
+                <option value="1">Вопрос</option>
+                <option value="2">Предложение</option>
+                <option value="3">Жалоба</option>
             </select>
         </div>
     </div>

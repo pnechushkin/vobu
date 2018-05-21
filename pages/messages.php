@@ -15,8 +15,11 @@ sorting=' . $MessagesNeeded->getValueSorting() . '&direction=' . $MessagesNeeded
 $previous_page = '<li><a href="?page=' . $p . '&
 sorting=' . $MessagesNeeded->getValueSorting() . '&direction=' . $MessagesNeeded->getDirectionSorting() . '">Предыдущая</a></li>';
 $all_mes_q = $BD->numRows($BD->query("SELECT * FROM messages"));
-$oreder = 'ORDER BY ' . $MessagesNeeded->getValueSorting() . ' ' . $MessagesNeeded->getDirectionSorting();
-$messages_arr = $BD->getAll("SELECT * FROM messages $oreder LIMIT ?i,?i", ($MessagesNeeded->getLimit() - 1) * 25,
+$ValueSorting = $MessagesNeeded->getValueSorting();
+if ($ValueSorting == 'category') $ValueSorting = 'name_category';
+$oreder = 'ORDER BY ' . $ValueSorting . ' ' . $MessagesNeeded->getDirectionSorting();
+$messages_arr = $BD->getAll("SELECT * FROM messages INNER JOIN `category`ON `messages`.`category` = `category`.`id` $oreder LIMIT ?i,?i",
+    ($MessagesNeeded->getLimit() - 1) * 25,
     $MessagesNeeded->getLimit() * 25);
 if ($MessagesNeeded->getLimit() - 1 == 0) {
     $previous_page = '';
@@ -48,25 +51,25 @@ if ($all_mes_q < (($p + 1) * 25)) {
 </div>
 <div class="row">
     <table class="table">
-        <tr>
-            <td>Логин</td>
-            <td>Категория</td>
-            <td>email</td>
-            <td>URL</td>
-            <td>Сообщение</td>
-            <td>Дата</td>
+        <tr class="row">
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Логин</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Категория</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1">email</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1">URL</td>
+            <td class="col-sm-6 col-xs-6 col-md-6 col-lg-6">Сообщение</td>
+            <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Дата</td>
         </tr>
         <?php
         for ($i = 0; $i < count($messages_arr); $i++) {
             extract($messages_arr[$i]);
             ?>
-            <tr>
-                <td><?php echo $username ?></td>
-                <td><?php echo $category ?></td>
-                <td><?php echo $email ?></td>
-                <td><?php echo $homepage ?></td>
-                <td><?php echo $message ?></td>
-                <td><?php echo date('d.m.Y', strtotime($added))  ?></td>
+            <tr class="row">
+                <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><?php echo $username ?></td>
+                <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><?php echo $name_category ?></td>
+                <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><?php echo $email ?></td>
+                <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><?php echo $homepage ?></td>
+                <td class="col-sm-6 col-xs-6 col-md-6 col-lg-6"><?php echo $message ?></td>
+                <td class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><?php echo date('d.m.Y', strtotime($added)) ?></td>
             </tr>
             <?php
         }
